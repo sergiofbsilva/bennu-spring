@@ -6,18 +6,28 @@ import org.springframework.web.method.HandlerMethod;
 
 public class PortalHandlerMethod extends HandlerMethod {
 
+    private final String accessExpression;
     private final Group group;
     private final Functionality functionality;
 
+    public PortalHandlerMethod(HandlerMethod method, String accessExpression, Functionality functionality) {
+        super(method);
+        this.accessExpression = accessExpression;
+        this.group = null;
+        this.functionality = functionality;
+    }
+
     public PortalHandlerMethod(HandlerMethod method, Group group, Functionality functionality) {
         super(method);
+        this.accessExpression = null;
         this.group = group;
         this.functionality = functionality;
-
-        System.out.println("Created handler for: " + method + " with group: " + group + " and functionality: " + functionality);
     }
 
     public Group getGroup() {
+        if (group == null && accessExpression != null) {
+            return Group.parse(accessExpression);
+        }
         return group;
     }
 

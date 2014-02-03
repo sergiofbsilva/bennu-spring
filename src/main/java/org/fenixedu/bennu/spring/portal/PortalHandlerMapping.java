@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.fenixedu.bennu.core.domain.groups.AnyoneGroup;
-import org.fenixedu.bennu.core.domain.groups.Group;
 import org.fenixedu.bennu.core.util.CoreConfiguration;
 import org.fenixedu.bennu.portal.model.Application;
 import org.fenixedu.bennu.portal.model.ApplicationRegistry;
@@ -74,17 +72,17 @@ public class PortalHandlerMapping extends RequestMappingHandlerMapping implement
         HandlerMethod handlerMethod = super.createHandlerMethod(handler, method);
         Functionality functionality = functionalities.get(method);
 
-        Group group = functionality != null ? functionality.getAccessGroup() : extractAccessControl(method);
+        String group = functionality != null ? functionality.getAccessGroup() : extractAccessControl(method);
 
         return new PortalHandlerMethod(handlerMethod, group, functionality);
     }
 
-    private Group extractAccessControl(Method method) {
+    private String extractAccessControl(Method method) {
         AccessControl accessControl = method.getAnnotation(AccessControl.class);
         if (accessControl == null) {
             accessControl = method.getDeclaringClass().getAnnotation(AccessControl.class);
         }
-        return accessControl == null ? AnyoneGroup.getInstance() : Group.parse(accessControl.value());
+        return accessControl == null ? "anyone" : accessControl.value();
     }
 
     private LocalizedString getLocalized(String key) {
