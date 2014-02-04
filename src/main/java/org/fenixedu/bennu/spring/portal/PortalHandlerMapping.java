@@ -40,8 +40,8 @@ public class PortalHandlerMapping extends RequestMappingHandlerMapping implement
             if (!applicationClasses.containsKey(appClass)) {
                 SpringApplication app = appClass.getAnnotation(SpringApplication.class);
                 application =
-                        new Application(SpringPortalBackend.BACKEND_KEY, appClass.getName(), app.path(), app.accessGroup(),
-                                getLocalized(app.titleKey()), getLocalized(app.descriptionKey()));
+                        new Application(appClass.getName(), app.path(), app.accessGroup(), getLocalized(app.titleKey()),
+                                getLocalized(app.descriptionKey()));
                 applicationClasses.put(appClass, application);
                 ApplicationRegistry.registerApplication(application);
             } else {
