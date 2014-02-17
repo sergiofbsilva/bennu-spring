@@ -2,8 +2,8 @@ package org.fenixedu.bennu.spring;
 
 import org.fenixedu.bennu.core.util.CoreConfiguration;
 import org.fenixedu.bennu.core.util.CoreConfiguration.ConfigurationProperties;
-import org.fenixedu.bennu.spring.portal.PortalHandlerMapping;
 import org.fenixedu.bennu.spring.portal.PortalHandlerInterceptor;
+import org.fenixedu.bennu.spring.portal.PortalHandlerMapping;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,6 +30,7 @@ public class BennuSpringConfiguration extends WebMvcConfigurationSupport {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
         resolver.setExposeContextBeansAsAttributes(true);
+        resolver.setOrder(1_000_000);
         return resolver;
     }
 
