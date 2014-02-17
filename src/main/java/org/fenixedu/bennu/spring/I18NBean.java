@@ -1,5 +1,9 @@
 package org.fenixedu.bennu.spring;
 
+import java.util.Locale;
+import java.util.Set;
+
+import org.fenixedu.bennu.core.util.CoreConfiguration;
 import org.fenixedu.commons.i18n.I18N;
 import org.springframework.context.MessageSource;
 
@@ -9,6 +13,14 @@ public class I18NBean {
 
     I18NBean(MessageSource source) {
         this.source = source;
+    }
+
+    public Locale getCurrentLocale() {
+        return I18N.getLocale();
+    }
+
+    public Set<Locale> getSupportedLocales() {
+        return CoreConfiguration.supportedLocales();
     }
 
     /*
@@ -40,7 +52,7 @@ public class I18NBean {
     }
 
     private String internalMessage(String key, Object... args) {
-        return source.getMessage(key, args, "!!" + key + "!!", I18N.getLocale());
+        return source.getMessage(key, args, "!!" + key + "!!", getCurrentLocale());
     }
 
 }
