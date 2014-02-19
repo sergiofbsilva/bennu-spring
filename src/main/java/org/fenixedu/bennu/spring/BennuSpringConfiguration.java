@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -66,6 +68,12 @@ public class BennuSpringConfiguration extends WebMvcConfigurationSupport {
         handlerMapping.setInterceptors(getInterceptors());
         handlerMapping.setContentNegotiationManager(mvcContentNegotiationManager());
         return handlerMapping;
+    }
+
+    @Bean
+    public ConversionService conversionService(GenericConversionService service) {
+        service.addConverter(new DomainObjectConverter());
+        return service;
     }
 
 }
