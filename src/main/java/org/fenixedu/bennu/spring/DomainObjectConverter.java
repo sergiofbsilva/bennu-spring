@@ -30,9 +30,14 @@ public class DomainObjectConverter implements ConditionalGenericConverter {
     @Override
     public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {
         final DomainObject domainObject = FenixFramework.getDomainObject((String) source);
-        if (domainObject == null || !FenixFramework.isDomainObjectValid(domainObject)) {
-            return null;
+
+        //throws ClassCastException if not required domain type
+        targetType.getType().cast(domainObject);
+
+        if (FenixFramework.isDomainObjectValid(domainObject)) {
+            return domainObject;
         }
-        return domainObject;
+
+        return null;
     }
 }
