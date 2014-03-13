@@ -34,6 +34,8 @@ public class BennuSpringConfiguration extends WebMvcConfigurationSupport {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
         resolver.setExposeContextBeansAsAttributes(true);
+        resolver.setPrefix("/WEB-INF/");
+        resolver.setSuffix(".jsp");
         resolver.setOrder(1_000_000);
         return resolver;
     }

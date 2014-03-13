@@ -3,6 +3,8 @@ package org.fenixedu.bennu.spring;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.fenixedu.bennu.core.util.CoreConfiguration;
+import org.fenixedu.bennu.portal.servlet.PortalBackendRegistry;
+import org.fenixedu.bennu.spring.portal.SpringPortalBackend;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class BennuSpringInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -26,5 +28,7 @@ public class BennuSpringInitializer extends AbstractAnnotationConfigDispatcherSe
     protected void customizeRegistration(Dynamic registration) {
         super.customizeRegistration(registration);
         registration.setMultipartConfig(CoreConfiguration.getMultipartConfigElement());
+        PortalBackendRegistry.registerPortalBackend(new SpringPortalBackend());
     }
+    
 }

@@ -5,16 +5,21 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ ElementType.TYPE, ElementType.PACKAGE })
+import org.springframework.stereotype.Component;
+
+@Component
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SpringApplication {
 
     String path();
 
-    String titleKey();
+    String group();
 
-    String descriptionKey();
+    String title();
 
-    String accessGroup() default "anyone";
+    String description() default PortalHandlerMapping.DELEGATE;
+
+    String hint() default "bennu-spring";
 
 }

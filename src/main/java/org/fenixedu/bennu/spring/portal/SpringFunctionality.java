@@ -8,16 +8,16 @@ import java.lang.annotation.Target;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SpringFunctionality {
 
-    Class<?> application();
+    Class<?> app();
 
-    String titleKey();
+    String title();
 
-    String descriptionKey();
+    String description() default PortalHandlerMapping.DELEGATE;
 
-    String accessGroup() default "anyone";
+    String accessGroup() default PortalHandlerMapping.DELEGATE;
 
 }
