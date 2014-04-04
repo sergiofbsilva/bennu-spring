@@ -16,7 +16,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
  * @author Sérgio Silva (sergio.silva@tecnico.ulisboa.pt)
  * 
  */
-//@ComponentScan
+@ComponentScan
 @Configuration
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
